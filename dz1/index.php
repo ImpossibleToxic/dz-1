@@ -1,37 +1,37 @@
-<!DOCTYPE html>
-<html lang="ru">
+<!DOCTYPE html> <!-- Определяет тип документа как HTML5 -->
+<html lang="ru"> <!-- Указывает, что язык страницы - русский -->
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <meta charset="UTF-8"> <!-- Устанавливает кодировку символов на UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Настройки для адаптивного дизайна -->
+    <title></title> <!-- Заголовок страницы (пока пустой) -->
 </head>
 <body>
-    <form action="" method="get">
-        <? if (isset($_GET["date1"])) { ?>
-            <input type="date" name="date1" value=<? echo $_GET["date1"] ?> required>
-            <input type="date" name="date2" value=<? echo $_GET["date2"] ?> required>
-        <? } else { ?>
-            <input type="date" name="date1" required>
-            <input type="date" name="date2" required>
-        <? } ?>
-        <input type="submit">
+    <form action="" method="get"> <!-- Начало формы, отправка данных методом GET на текущую страницу -->
+        <? if (isset($_GET["date1"])) { ?> <!-- Проверяет, установлено ли значение date1 в GET-запросе -->
+            <input type="date" name="date1" value=<? echo $_GET["date1"] ?> required> <!-- Поле для ввода первой даты с предустановленным значением -->
+            <input type="date" name="date2" value=<? echo $_GET["date2"] ?> required> <!-- Поле для ввода второй даты с предустановленным значением -->
+        <? } else { ?> <!-- Если date1 не установлено, выполняется следующее -->
+            <input type="date" name="date1" required> <!-- Поле для ввода первой даты (обязательно) -->
+            <input type="date" name="date2" required> <!-- Поле для ввода второй даты (обязательно) -->
+        <? } ?> 
+        <input type="submit"> <!-- Кнопка для отправки формы -->
     </form>
     <?php
-    if (isset($_GET["date1"])) {
-        $date1 = strtotime($_GET["date1"]);
-        $date2 = strtotime($_GET["date2"]);
-        $second = abs($date1 - $date2);
-        $year = floor($second / 31536000);
-        $day = floor($second / 86400);
-        $hour = $day * 24;
-        $minute = $hour * 60; 
+    if (isset($_GET["date1"])) { // Проверяет, установлено ли значение date1 в GET-запросе
+        $date1 = strtotime($_GET["date1"]); // Преобразует строку даты в метку времени UNIX для date1
+        $date2 = strtotime($_GET["date2"]); // Преобразует строку даты в метку времени UNIX для date2
+        $second = abs($date1 - $date2); // Вычисляет абсолютное значение разности между двумя датами в секундах
+        $year = floor($second / 31536000); // Вычисляет количество полных лет в разнице
+        $day = floor($second / 86400); // Вычисляет количество полных дней в разнице
+        $hour = $day * 24; // Вычисляет количество часов (умножая дни на 24)
+        $minute = $hour * 60; // Вычисляет количество минут (умножая часы на 60)
     ?>
-        <h3>Разница дат (<? echo $_GET["date1"] ?> — <? echo $_GET["date2"] ?>):</h3>
-        <h4>В годах: <? echo $year ?></h4>
-        <h4>В днях: <? echo $day ?></h4>
-        <h4>В часах: <? echo $hour ?></h4>
-        <h4>В минутах: <? echo $minute ?></h4>
-        <h4>В секундах: <? echo $second ?></h4>
-    <? } ?>
+        <h3>Разница дат (<? echo $_GET["date1"] ?> — <? echo $_GET["date2"] ?>):</h3> <!-- Заголовок с выводом введенных дат -->
+        <h4>В годах: <? echo $year ?></h4> <!-- Вывод количества лет в разнице -->
+        <h4>В днях: <? echo $day ?></h4> <!-- Вывод количества дней в разнице -->
+        <h4>В часах: <? echo $hour ?></h4> <!-- Вывод количества часов в разнице -->
+        <h4>В минутах: <? echo $minute ?></h4> <!-- Вывод количества минут в разнице -->
+        <h4>В секундах: <? echo $second ?></h4> <!-- Вывод количества секунд в разнице -->
+    <? } ?> <!-- Закрывающий тег условия if -->
 </body>
 </html>
